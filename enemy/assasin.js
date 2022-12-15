@@ -8,7 +8,9 @@ export default class Assassin extends Ennemy{
         this.lives = 5;
         this.score = this.lives;
         this.UnitShieldRemovedOnHIt = 15;
+        //@todo
         this.y = Math.random() * (this.game.height * 0.9 - this.height);
+        this.y = Math.random() * (this.game.width * 0.9 - this.width);
 
     }
 }

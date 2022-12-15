@@ -3,9 +3,13 @@ export default class Ennemy {
         this.game  = game;
         this.width = 15;
         this.height = 15;
-        this.x = this.game.width;
+        //@todo we want to randomize the spaw
+        // with certain colusion
+        this.x = this.game.width - 50;
+
         this.y = 15;
-        this.speedX = Math.random() * -1.5 - 0.5;
+        this.speedX = 0.2;
+        this.speedY = 0.2;
         this.removeElement = false;
         this.maxSpeed = 2;  
         this.color = 'red';    
@@ -15,11 +19,27 @@ export default class Ennemy {
         this.particles = [];
     }
     update(){
-        this.x += this.speedX;
-        if (this.x + this.width < 0){
+        //@todo we want to chase player here
+        //@todo instead of go right to left botder of the screen
+        //this.x += this.speedX;
+
+        if (this.game.player.x <= this.x){
+            this.x -= this.speedX;
+        }else{
+            this.x += this.speedX;
+        }
+
+
+        if (this.game.player.y <= this.y){
+            this.y -= this.speedY;
+        }else {
+            this.y += this.speedY;
+        }
+
+        /*if (this.x + this.width < 0){
             this.removeElement = true;
             this.game.worldShield -= this.UnitShieldRemovedOnHIt;
-        }
+        }*/
         
         this.particles.forEach(particle =>{
             particle.update();

@@ -9,10 +9,10 @@ import Projectile from "../projectile/projectile.js";
     constructor (game){
         // by ref always !!! not a copy
         this.game  = game;
-        this.width = 25;
-        this.height = 25;
-        this.x = 20;
-        this.y = 100;
+        this.width = 20;
+        this.height = 20;
+        this.x = (this.game.width / 2) ;
+        this.y = (this.game.height / 2)  ;
         this.speedY = 0;
         this.speedX = 0;
         this.maxSpeed = 2;
@@ -25,7 +25,8 @@ import Projectile from "../projectile/projectile.js";
         this.ammoTimer = 0;
         this.ammoInterval = 500;
         this.BonusFire = false;
-      
+        this.xp = 6;
+        this.lvl = 1;
     } 
     /**
      * 
@@ -56,10 +57,10 @@ import Projectile from "../projectile/projectile.js";
 
         if (this.game.keys.includes('a')){
     
-            this.shootUp();
+            //this.shootUp();
             // previent le multi shoot ... pas terrible mais ca fonctionne à améliorer
             if (this.game.keys.indexOf('a') > -1){
-                this.game.keys.splice(this.game.keys.indexOf('a'), 1);
+               // this.game.keys.splice(this.game.keys.indexOf('a'), 1);
             }
            
         }
@@ -68,12 +69,12 @@ import Projectile from "../projectile/projectile.js";
         this.x += this.speedX;
 
 
-        this.projectiles.forEach(projectile => {
+        /*this.projectiles.forEach(projectile => {
             projectile.update();
-        });
+        });*/
 
         //delete marked projectile
-        this.projectiles = this.projectiles.filter(projectile => !projectile.removeElement);
+        // this.projectiles = this.projectiles.filter(projectile => !projectile.removeElement);
         
 
         
@@ -83,9 +84,9 @@ import Projectile from "../projectile/projectile.js";
      * @param {*} context 
      */
     draw(context){
-        context.fillStyle = 'black';
+        context.fillStyle = 'white';
         context.fillRect(this.x,this.y,this.width,this.height);
-        context.fillRect(this.x + this.width,this.y + this.width / 4,this.width/2,this.height/2);
+        //context.fillRect(this.x + this.width,this.y + this.width / 4,this.width/2,this.height/2);
 
         this.projectiles.forEach(projectile => {
             projectile.draw(context);
@@ -93,13 +94,14 @@ import Projectile from "../projectile/projectile.js";
         
     }
 
-    shootUp(){
+    /*shootUp(){
         if (this.ammo > 0){
             this.projectiles.push(new Projectile(this.game, this.x, this.y));
             this.ammo--;
             console.table(this.projectiles);
         } 
         
-    }
+    }*/
+
 
 }

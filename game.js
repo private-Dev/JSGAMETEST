@@ -30,7 +30,7 @@ export default class Game {
         this.ui = new UI(this);
         this.uimenu = new UIMENU(this);
         this.uioption = new UIOPTION(this);
-        this.maxEnemies = 15;
+        this.maxEnemies = 10;
         this.EnemyInterval = 1500;
         this.EnemyTimer = 0;
         this.score = 0;
@@ -52,7 +52,10 @@ export default class Game {
 
         this.deathParticles = [];
         this.input = new InputHandler(this);
-        console.log('game constructor');
+
+        this.TexpLvl = [0];
+        this.setAmmountXpToTableLvl();
+
     }
 
     init(){
@@ -125,4 +128,20 @@ export default class Game {
         )
     }
 
+    setAmmountXpToTableLvl(){
+        for (let i =1; i < 150; i++){
+            if (i < 20){
+                this.TexpLvl.push((i * 10)-4);
+            }else if (i > 20 && i < 40){
+                this.TexpLvl.push((i * 13)-6);
+            }else if (i > 40){
+                this.TexpLvl.push((i * 16)-8);
+            }
+            if(i == 20)
+                i * 10-5+600;
+            if(i == 40)i*13-6+2400;
+
+        }
+        console.table(this.TexpLvl);
+    }
 }
