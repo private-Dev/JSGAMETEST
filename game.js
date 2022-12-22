@@ -62,8 +62,8 @@ export default class Game {
 
         this.score = 0;
         this.enemies = [];
-        this.player.x = 20;
-        this.player.y = 100;
+        this.player.position.x = 20;
+        this.player.position.y = 100;
         this.player.ammo = 15;
         this.player.shield = 100;
         this.objects = [];
@@ -121,10 +121,10 @@ export default class Game {
       * @param {*} rect2 
       */   
     checkCollision(rect1,rect2){
-        return ( rect1.x < rect2.x + rect2.width &&
-                 rect1.x + rect1.width > rect2.x   &&
-                 rect1.y < rect2.y + rect2.height &&
-                 rect1.y + rect1.height > rect2.y 
+        return ( rect1.position.x < rect2.position.x + rect2.width &&
+                 rect1.position.x + rect1.width > rect2.position.x   &&
+                 rect1.position.y < rect2.position.y + rect2.height &&
+                 rect1.position.y + rect1.height > rect2.position.y
         )
     }
 

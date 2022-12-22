@@ -1,4 +1,5 @@
 import Projectile from "../projectile/projectile.js";
+import Vector from "../utils/Vector.js";
 
  export default class Player {
 
@@ -11,8 +12,6 @@ import Projectile from "../projectile/projectile.js";
         this.game  = game;
         this.width = 20;
         this.height = 20;
-        this.x = (this.game.width / 2) ;
-        this.y = (this.game.height / 2)  ;
         this.speedY = 0;
         this.speedX = 0;
         this.maxSpeed = 2;
@@ -20,27 +19,33 @@ import Projectile from "../projectile/projectile.js";
         this.ammo = 20;
         this.shield = 100
         this.maxShield = 100
-        
         this.maxAmmo = 50;
         this.ammoTimer = 0;
         this.ammoInterval = 500;
         this.BonusFire = false;
         this.xp = 6;
         this.lvl = 1;
-    } 
+        this.position = new Vector(this.game.width * 0.5, this.game.height * 0.5);
+
+
+    }
+
+    start(){
+
+    }
     /**
      * 
      */
     update(deltaTime){
         // on ajout dans le temps des munitions au player  ...    
-        if (this.ammoTimer > this.ammoInterval && this.ammo < this.maxAmmo){
+       /* if (this.ammoTimer > this.ammoInterval && this.ammo < this.maxAmmo){
             this.ammo++;
             this.ammoTimer = 0;
         }else{
             this.ammoTimer += deltaTime;
-        }
+        }*/
 
-        // gestion mouvement du player 
+        // gestion mouvement du player
         if (this.game.keys.includes('ArrowUp')){
             this.speedY = -this.maxSpeed;
         }else if (this.game.keys.includes('ArrowDown')) {
@@ -64,17 +69,15 @@ import Projectile from "../projectile/projectile.js";
             }
            
         }
-    
-        this.y += this.speedY;
-        this.x += this.speedX;
+        this.position.x += this.speedX;
+        this.position.y += this.speedY;
 
-
-        /*this.projectiles.forEach(projectile => {
+        this.projectiles.forEach(projectile => {
             projectile.update();
-        });*/
+        });
 
         //delete marked projectile
-        // this.projectiles = this.projectiles.filter(projectile => !projectile.removeElement);
+         this.projectiles = this.projectiles.filter(projectile => !projectile.removeElement);
         
 
         
@@ -85,7 +88,7 @@ import Projectile from "../projectile/projectile.js";
      */
     draw(context){
         context.fillStyle = 'white';
-        context.fillRect(this.x,this.y,this.width,this.height);
+        context.fillRect(this.position.x,this.position.y,this.width,this.height);
         //context.fillRect(this.x + this.width,this.y + this.width / 4,this.width/2,this.height/2);
 
         this.projectiles.forEach(projectile => {
